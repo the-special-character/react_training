@@ -1,0 +1,27 @@
+{
+  "name": "react_training",
+  "version": "1.0.0",
+  "description": "react training",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/the-special-character/react_training.git"
+  },
+  "keywords": [
+    "react",
+    "redux",
+    "javascript"
+  ],
+  "author": "Yagnesh Modh <yagnesh.modh@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/the-special-character/react_training/issues"
+  },
+  "homepage": "https://github.com/the-special-character/react_training#readme",
+  "dependencies": {
+    "date-fns": "^2.30.0"
+  }
+}

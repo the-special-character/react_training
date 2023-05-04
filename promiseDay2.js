@@ -50,31 +50,31 @@ const rightSection2 = () => {
   });
 };
 
-const loadData = async () => {
-  try {
-    console.time("promise");
+// const loadData = async () => {
+//   try {
+//     console.time("promise");
 
-    const res = await Promise.allSettled([
-      feedSection(),
-      leftSection(),
-      rightSection1(),
-      rightSection2(),
-    ]);
+//     const res = await Promise.allSettled([
+//       feedSection(),
+//       leftSection(),
+//       rightSection1(),
+//       rightSection2(),
+//     ]);
 
-    console.log(res);
-    // const leftRes = await leftSection();
-    // console.log(leftRes);
-    // const feedRes = await feedSection();
-    // console.log(feedRes);
-    // const rightRes1 = await rightSection1();
-    // console.log(rightRes1);
-    // const rightRes2 = await rightSection1();
-    // console.log(rightRes2);
-    console.timeEnd("promise");
-  } catch (error) {}
-};
+//     console.log(res);
+//     // const leftRes = await leftSection();
+//     // console.log(leftRes);
+//     // const feedRes = await feedSection();
+//     // console.log(feedRes);
+//     // const rightRes1 = await rightSection1();
+//     // console.log(rightRes1);
+//     // const rightRes2 = await rightSection1();
+//     // console.log(rightRes2);
+//     console.timeEnd("promise");
+//   } catch (error) {}
+// };
 
-loadData();
+// loadData();
 
 // const url =
 //   "https://f462-2405-201-2032-c826-7cb0-ab82-69c1-fee6.ngrok-free.app";

@@ -35,20 +35,3 @@ fetch("http://localhost:3000/login", {
   .catch((err) => {
     console.log(err);
   });
-
-// fetch("http://localhost:3000/products")
-// .then(res => {
-//     if(!res.ok) {
-//         throw new Error("something wrong wrong....")
-//     }
-//     return res.json();
-// })
-// .then(json => {
-//     console.log(json);
-// })
-// .catch(err => {
-//     console.log(err);
-// })
-// .finally(() => {
-//     console.log("stop loader");
-// })

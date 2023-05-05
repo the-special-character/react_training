@@ -1,0 +1,10 @@
+$color: red;
+
+@mixin theme() {
+  background-color: $color;
+  color: #fff;
+}
+
+.container {
+  @include theme;
+}

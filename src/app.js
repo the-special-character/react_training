@@ -1,12 +1,12 @@
 // const { format } = require("date-fns");
 
-export const testAddFunction = (a, b) => a + b;
+export const testAddFunction = (a, b) => a + b
 
-export const test = () => 'hello';
+export const test = () => 'hello'
 
-const a = 1;
+const a = 1
 
-console.log(a);
+console.log(a)
 
 // const greet = name => `Hello, ${name}`;
 
@@ -15,11 +15,11 @@ console.log(a);
 // const abc = () => 'abc';
 class Animal {
   static makeSound() {
-    console.log('bow wow');
+    console.log('bow wow')
   }
 }
 
-export default Animal;
+export default Animal
 
 // module.exports = testAddFunction;
 // export default only 1 time

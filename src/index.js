@@ -1,13 +1,11 @@
 // const add = require("./app");
 // import { testAddFunction } from "./app";
 
-import abc, { test as pqr, testAddFunction } from "./app";
-
-const test = () => {};
+import Abc, { test as pqr, testAddFunction } from './app';
 
 console.log(pqr());
 
-const animal = new abc();
+const animal = new Abc();
 
 console.log(animal.makeSound());
 
@@ -25,7 +23,7 @@ console.log(pqr());
 
 // const add = () => {};
 
-const h1Element = document.getElementsByTagName("h1");
+const h1Element = document.getElementsByTagName('h1');
 
 console.log(h1Element[0]);
 

@@ -4,9 +4,9 @@ export const testAddFunction = (a, b) => a + b;
 
 export const test = () => 'hello';
 
-const greet = name => `Hello, ${name}`;
+// const greet = name => `Hello, ${name}`;
 
-const str = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. ';
+// const str = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. ';
 
 // const abc = () => 'abc';
 class Animal {

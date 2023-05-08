@@ -1,7 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+// Function Component
 function User({ firstName, lastName, age, gender }) {
+  console.log('Render User componetn')
   return (
     <div>
       <p>{`First Name: ${firstName}`}</p>

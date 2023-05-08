@@ -8,6 +8,9 @@ module.exports = {
     filename: 'bundle.js',
   },
   mode: 'development',
+  resolve: {
+    extensions: ['.js', '.json', '.jsx'],
+  },
   module: {
     rules: [
       {

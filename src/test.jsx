@@ -11,9 +11,16 @@ import Child2 from './child2'
 
 // 2. updating
 // -> getDerivedStateFromProps
-// -> shouldComponentUpdate / PureComponent
+// -> shouldComponentUpdate / PureComponent / memo(function component)
+// -> render
+// -> getSnapshotBeforeUpdate
+// -> componentDidUpdate
 
-let a = 10
+// unmounting
+
+// -> componentWillUnmount
+
+// Error
 
 export default class Test extends Component {
   static propTypes = {
@@ -55,9 +62,6 @@ export default class Test extends Component {
   //   to fetch data from database
   // register events
   async componentDidMount() {
-    document.addEventListener('copy', () => {
-      console.log('Coppied')
-    })
     try {
       const res = await fetch('https://jsonplaceholder.typicode.com/photos/1')
 
@@ -67,6 +71,8 @@ export default class Test extends Component {
     // console.log(document.getElementById('heading'))
     // document.getElementById('heading').style.color = 'red'
   }
+
+  componentDidUpdate(prevProps, prevState) {}
 
   inc = () => {
     this.setState(({ counter }) => ({
@@ -103,7 +109,6 @@ export default class Test extends Component {
           >
             +
           </button>
-          {`Hello a ${a}`}
           <p className="px-6 text-4xl font-bold">{counter}</p>
           <button
             className="w-full py-3 px-4 bg-blue-500 rounded-md text-white text-xl"
@@ -114,7 +119,7 @@ export default class Test extends Component {
           </button>
         </div>
         <Child1 />
-        <Child2 counter={counter} />
+        {counter < 10 && <Child2 counter={counter} />}
       </div>
     )
   }

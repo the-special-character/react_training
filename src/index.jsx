@@ -11,7 +11,7 @@ const root = createRoot(container)
 
 root.render(
   <>
-    <App title="Virat Kohli" desc="One Down Batsman" number={10} />
+    <App title="Virat Kohli" number={10} />
     <App title="Rohit Sharma" desc="Opening Batsman" number={45} />
   </>
 )

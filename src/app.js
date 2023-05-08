@@ -20,8 +20,12 @@ function App({ title, desc, number }) {
 
 App.propTypes = {
   title: PropTypes.string.isRequired,
-  desc: PropTypes.string.isRequired,
+  desc: PropTypes.string,
   number: PropTypes.number.isRequired,
+}
+
+App.defaultProps = {
+  desc: 'Batsman',
 }
 
 export default App

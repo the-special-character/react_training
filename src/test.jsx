@@ -19,8 +19,26 @@ import Child2 from './child2'
 // unmounting
 
 // -> componentWillUnmount
+// -> componentDidCatch
 
 // Error
+
+// Mounting
+// -> Constructor(Call only once)
+// -> getDerivedStateFromProps ()
+// -> render
+// -> componentDidMount(call only once)
+// updating
+// -> getDerivedStateFromProps
+// -> shouldComponentUpdate / PureComponent / memo(performace)
+// -> render
+// -> snapshotBeforeUpdate
+// -> componentDidUpdate
+// unmounting
+// -> componentWillUnmount(perfromace)
+// error
+// -> getDerivedStateFromError
+// ->
 
 export default class Test extends Component {
   static propTypes = {
@@ -84,9 +102,27 @@ export default class Test extends Component {
     this.setState(({ counter }) => ({ counter: counter - 1 }))
   }
 
+  static getDerivedStateFromError(err) {
+    return {
+      err,
+    }
+  }
+
+  componentDidCatch(error, errorInfo) {
+    console.log('errorInfo', errorInfo.componentStack)
+    // logging mechanism
+  }
+
   //   render html in DOM
   render() {
-    const { counter, photo, name } = this.state
+    const { counter, photo, name, err } = this.state
+    if (err) {
+      return (
+        <h1 className="h-screen w-screen flex justify-center items-center font-bold text-4xl text-red-500">
+          {err.message}
+        </h1>
+      )
+    }
     return (
       <div>
         <h1 id="heading">{name}</h1>

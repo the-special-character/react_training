@@ -19,12 +19,17 @@ export default class Child2 extends PureComponent {
   }
 
   mouseMove = () => {
-    console.log('Mouse Move')
+    try {
+      throw new Error('something went wrong...')
+      console.log('Mouse Move')
+    } catch (error) {}
   }
 
   render() {
     console.log('Child 2 component')
     const { counter } = this.props
+    throw new Error('something went wrong...')
+
     return <div>{`Child2 ${counter}`}</div>
   }
 }

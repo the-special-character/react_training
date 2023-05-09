@@ -2,26 +2,17 @@ import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import TodoListItem from './todoListItem'
 
-function TodoList({ todoList, filterStatus, completeTodo, deleteTodo }) {
+function TodoList({ todoList, completeTodo, deleteTodo }) {
   return (
     <div className="w-full flex-1 overflow-y-auto">
-      {todoList.map(x => {
-        if (
-          (x.isDone === true && filterStatus === 'completed') ||
-          (x.isDone === false && filterStatus === 'pending') ||
-          filterStatus === 'all'
-        ) {
-          return (
-            <TodoListItem
-              key={x.id}
-              todoItem={x}
-              completeTodo={completeTodo}
-              deleteTodo={deleteTodo}
-            />
-          )
-        }
-        return null
-      })}
+      {todoList.map(x => (
+        <TodoListItem
+          key={x.id}
+          todoItem={x}
+          completeTodo={completeTodo}
+          deleteTodo={deleteTodo}
+        />
+      ))}
     </div>
   )
 }
@@ -29,7 +20,6 @@ function TodoList({ todoList, filterStatus, completeTodo, deleteTodo }) {
 TodoList.propTypes = {
   completeTodo: PropTypes.func.isRequired,
   deleteTodo: PropTypes.func.isRequired,
-  filterStatus: PropTypes.oneOf(['all', 'pending', 'completed']).isRequired,
   todoList: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number,

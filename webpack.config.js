@@ -30,4 +30,9 @@ module.exports = {
       filename: 'index.html',
     }),
   ],
+  devServer: {
+    port: 3004,
+    open: true,
+    historyApiFallback: true,
+  },
 }

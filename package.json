@@ -27,11 +27,14 @@
   },
   "homepage": "https://github.com/the-special-character/react_training#readme",
   "dependencies": {
+    "@headlessui/react": "^1.7.14",
+    "@heroicons/react": "^2.0.18",
     "date-fns": "^2.30.0",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-addons-shallow-compare": "^15.6.3",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.11.1"
   },
   "devDependencies": {
     "@babel/core": "^7.21.8",

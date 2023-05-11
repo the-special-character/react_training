@@ -35,5 +35,13 @@
       "isDone": false,
       "id": 20
     }
+  ],
+  "users": [
+    {
+      "email": "yagnesh.modh@gmail.com",
+      "password": "$2a$10$vQ6.Q45obMKXt3DBLq2IzOy.CbFwoTodw3Twmldc6r0GDpiwZLukS",
+      "name": "YAGNESH MODH",
+      "id": 1
+    }
   ]
 }

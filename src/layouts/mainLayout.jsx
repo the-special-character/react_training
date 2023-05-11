@@ -1,7 +1,8 @@
-import React, { Fragment } from 'react'
-import { Outlet } from 'react-router-dom'
+import React, { Fragment, useContext } from 'react'
+import { Navigate, Outlet } from 'react-router-dom'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { AuthContext } from '../context/authContext'
 
 const navigation = [
   { name: 'Dashboard', href: '#', current: true },
@@ -15,6 +16,12 @@ function classNames(...classes) {
 }
 
 function MainLayout() {
+  const { user } = useContext(AuthContext)
+
+  if (!user) {
+    return <Navigate to="/" />
+  }
+
   return (
     <>
       <Disclosure as="nav" className="bg-gray-800">

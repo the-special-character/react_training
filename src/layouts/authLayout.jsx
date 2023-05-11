@@ -1,8 +1,15 @@
-import React from 'react'
-import { Link, Outlet } from 'react-router-dom'
+import React, { useContext } from 'react'
+import { Link, Navigate, Outlet } from 'react-router-dom'
 import { LocaleProvider } from '../context/localeContext'
+import { AuthContext } from '../context/authContext'
 
 function AuthLayout() {
+  const { user } = useContext(AuthContext)
+
+  if (user) {
+    return <Navigate to="/dashboard" />
+  }
+
   return (
     <LocaleProvider>
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">

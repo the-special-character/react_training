@@ -1,8 +1,19 @@
 import React from 'react'
+import { LocaleContext } from '../../context/localeContext'
 
 function Register() {
   return (
     <form className="space-y-6" action="#" method="POST">
+      <LocaleContext.Consumer>
+        {({ locale, toggleLocale }) => (
+          <div>
+            <p>{`Current Locale: ${locale}`}</p>
+            <button type="button" onClick={toggleLocale}>
+              Change Locale
+            </button>
+          </div>
+        )}
+      </LocaleContext.Consumer>
       <div>
         <label
           htmlFor="name"

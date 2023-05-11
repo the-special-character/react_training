@@ -16,7 +16,7 @@ function classNames(...classes) {
 }
 
 function MainLayout() {
-  const { user } = useContext(AuthContext)
+  const { user, logout } = useContext(AuthContext)
 
   if (!user) {
     return <Navigate to="/" />
@@ -132,15 +132,16 @@ function MainLayout() {
                         </Menu.Item>
                         <Menu.Item>
                           {({ active }) => (
-                            <a
-                              href="#"
+                            <button
+                              type="button"
+                              onClick={logout}
                               className={classNames(
                                 active ? 'bg-gray-100' : '',
-                                'block px-4 py-2 text-sm text-gray-700'
+                                'w-full text-left block px-4 py-2 text-sm text-gray-700'
                               )}
                             >
                               Sign out
-                            </a>
+                            </button>
                           )}
                         </Menu.Item>
                       </Menu.Items>

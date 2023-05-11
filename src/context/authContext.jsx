@@ -41,7 +41,12 @@ function AuthProvider({ children }) {
     }
   }, [])
 
-  const value = useMemo(() => ({ user, onLogin, onRegister }), [user])
+  const logout = () => {
+    sessionStorage.clear()
+    setUser(null)
+  }
+
+  const value = useMemo(() => ({ user, onLogin, onRegister, logout }), [user])
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }

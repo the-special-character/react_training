@@ -8,9 +8,20 @@ const axiosInstance = axios.create({
 
 // Add a request interceptor
 axiosInstance.interceptors.request.use(
-  config =>
+  config => {
+    const sessionUser = sessionStorage.getItem('user')
+    let { headers } = config
+    if (sessionUser) {
+      const JSONSession = JSON.parse(sessionUser)
+      headers = {
+        ...headers,
+        Authorization: `Bearer ${JSONSession.accessToken}`,
+      }
+    }
+
     // Do something before request is sent
-    config,
+    return { ...config, headers }
+  },
   error =>
     // Do something with request error
     Promise.reject(error)

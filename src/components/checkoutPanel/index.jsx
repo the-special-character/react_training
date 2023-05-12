@@ -3,9 +3,12 @@ import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { ShoppingContext } from '../../context/ShoppingContext'
 import { displayCurrency } from '../../utils'
+import { StatusContext } from '../../context/statusContext'
 
 function CheckoutPanel({ open, togglePanel }) {
   const { products, cart, deleteCart } = useContext(ShoppingContext)
+
+  const { status } = useContext(StatusContext)
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -60,6 +63,10 @@ function CheckoutPanel({ open, togglePanel }) {
                               const product = products.find(
                                 x => x.id === cartItem.productId
                               )
+                              const statusItem = status.find(
+                                x =>
+                                  x.id === product.id && x.state === 'loading'
+                              )
                               return (
                                 <li key={product.id} className="flex py-6">
                                   <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
@@ -93,7 +100,11 @@ function CheckoutPanel({ open, togglePanel }) {
                                       <div className="flex">
                                         <button
                                           type="button"
-                                          className="font-medium text-indigo-600 hover:text-indigo-500"
+                                          disabled={
+                                            statusItem?.actionType ===
+                                            'DELETE_CART'
+                                          }
+                                          className="font-medium text-indigo-600 hover:text-indigo-500 disabled:text-slate-500 disabled:cursor-wait"
                                           onClick={() => deleteCart(cartItem)}
                                         >
                                           Remove

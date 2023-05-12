@@ -2,15 +2,20 @@ import React, { useContext } from 'react'
 import Reviews from '../../components/reviews'
 import { ShoppingContext } from '../../context/ShoppingContext'
 import { displayCurrency } from '../../utils'
+import { StatusContext } from '../../context/statusContext'
 
 function Home() {
   const { products, cart, updateCart, deleteCart, addToCart } =
     useContext(ShoppingContext)
+  const { status } = useContext(StatusContext)
 
   return (
     <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
       {products.map(product => {
         const cartItem = cart.find(x => x.productId === product.id)
+        const statusItem = status.find(
+          x => x.id === product.id && x.state === 'loading'
+        )
         return (
           <div
             key={product.id}
@@ -46,7 +51,8 @@ function Home() {
                   <div className="flex items-center mt-6">
                     <button
                       type="button"
-                      className="flex-1 w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                      disabled={statusItem?.actionType === 'UPDATE_CART'}
+                      className="flex-1 w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:bg-slate-400 disabled:cursor-wait"
                       onClick={() =>
                         updateCart({
                           ...cartItem,
@@ -61,7 +67,11 @@ function Home() {
                     </p>
                     <button
                       type="button"
-                      className="flex-1 w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                      disabled={
+                        statusItem?.actionType === 'UPDATE_CART' ||
+                        statusItem?.actionType === 'DELETE_CART'
+                      }
+                      className="flex-1 w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:bg-slate-400 disabled:cursor-wait"
                       onClick={() => {
                         if (cartItem.quantity > 1) {
                           updateCart({
@@ -79,7 +89,8 @@ function Home() {
                 ) : (
                   <button
                     type="button"
-                    className="mt-6 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                    disabled={statusItem?.actionType === 'ADD_CART'}
+                    className="mt-6 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:bg-slate-400 disabled:cursor-wait"
                     onClick={() => addToCart(product)}
                   >
                     Add to bag

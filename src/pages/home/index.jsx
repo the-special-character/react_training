@@ -1,21 +1,46 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useMemo } from 'react'
+import { connect } from 'react-redux'
 import Reviews from '../../components/reviews'
-import { ShoppingContext } from '../../context/ShoppingContext'
+// import { ShoppingContext } from '../../context/ShoppingContext'
 import { displayCurrency } from '../../utils'
-import { StatusContext } from '../../context/statusContext'
+// import { StatusContext } from '../../context/statusContext'
+import { loadProductsRequest } from '../../actions/productsAction'
+import {
+  addCartItemRequest,
+  deleteCartItemRequest,
+  loadCartRequest,
+  updateCartItemRequest,
+} from '../../actions/cartActions'
 
-function Home() {
-  const { products, cart, updateCart, deleteCart, addToCart } =
-    useContext(ShoppingContext)
-  const { status } = useContext(StatusContext)
+function Home({
+  productsData,
+  cartData,
+  loadProducts,
+  loadCart,
+  addToCart,
+  updateCart,
+  deleteCart,
+}) {
+  console.log('productsData', productsData)
+  console.log('cartData', cartData)
+
+  useEffect(() => {
+    loadProducts()
+    loadCart()
+  }, [])
+
+  const products = useMemo(() => productsData.data, [productsData.data])
+  const cart = useMemo(() => cartData.data, [cartData.data])
+
+  // const { products, cart, updateCart, deleteCart, addToCart } =
+  //   useContext(ShoppingContext)
+  // const { status } = useContext(StatusContext)
 
   return (
     <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
       {products.map(product => {
         const cartItem = cart.find(x => x.productId === product.id)
-        const statusItem = status.find(
-          x => x.id === product.id && x.state === 'loading'
-        )
+        const statusItem = undefined
         return (
           <div
             key={product.id}
@@ -105,4 +130,17 @@ function Home() {
   )
 }
 
-export default Home
+const mapStateToProps = state => ({
+  productsData: state.products,
+  cartData: state.cart,
+})
+
+const mapDispatchToProps = dispatch => ({
+  loadProducts: () => loadProductsRequest()(dispatch),
+  loadCart: () => loadCartRequest()(dispatch),
+  addToCart: product => addCartItemRequest(product)(dispatch),
+  updateCart: cartItem => updateCartItemRequest(cartItem)(dispatch),
+  deleteCart: cartItem => deleteCartItemRequest(cartItem)(dispatch),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home)

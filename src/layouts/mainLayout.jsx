@@ -1,14 +1,13 @@
 import React, { useContext, useState } from 'react'
 import { Navigate, Outlet } from 'react-router-dom'
-
+import { connect } from 'react-redux'
 import { AuthContext } from '../context/authContext'
-import ShoppingProvider from '../context/ShoppingContext'
 import Header from '../components/header'
 import CheckoutPanel from '../components/checkoutPanel'
+import { logoutRequest } from '../actions/userActions'
 
-function MainLayout() {
+function MainLayout({ user, logout }) {
   const [open, setOpen] = useState(false)
-  const { user, logout } = useContext(AuthContext)
 
   if (!user) {
     return <Navigate to="/" />
@@ -17,12 +16,18 @@ function MainLayout() {
   const togglePanel = () => setOpen(val => !val)
 
   return (
-    <ShoppingProvider>
+    <>
       <Header logout={logout} togglePanel={togglePanel} />
       <Outlet />
       <CheckoutPanel open={open} togglePanel={togglePanel} />
-    </ShoppingProvider>
+    </>
   )
 }
 
-export default MainLayout
+const mapStateToProps = ({ user }) => ({ user })
+
+const mapDispatchToProps = dispatch => ({
+  logout: () => logoutRequest()(dispatch),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(MainLayout)

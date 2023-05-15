@@ -1,22 +1,20 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { useForm } from 'react-hook-form'
+import { connect } from 'react-redux'
 import CustomForm from '../../components/customForm'
 import loginFields from './fields'
-import { AuthContext } from '../../context/authContext'
+import { loginRequest } from '../../actions/userActions'
 
-function Login() {
-  const { onLogin } = useContext(AuthContext)
+function Login({ onLogin }) {
   const form = useForm({
     mode: 'onBlur',
   })
 
-  return (
-    <CustomForm
-      fields={loginFields}
-      onSubmit={data => onLogin(data, form.setError)}
-      form={form}
-    />
-  )
+  return <CustomForm fields={loginFields} onSubmit={onLogin} form={form} />
 }
 
-export default Login
+const mapDispatchToProps = dispatch => ({
+  onLogin: data => loginRequest(data)(dispatch),
+})
+
+export default connect(null, mapDispatchToProps)(Login)

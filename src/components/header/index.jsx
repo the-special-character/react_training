@@ -1,4 +1,4 @@
-import React, { Fragment, useContext } from 'react'
+import React, { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import {
   Bars3Icon,
@@ -6,7 +6,7 @@ import {
   ShoppingBagIcon,
 } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
-import { ShoppingContext } from '../../context/ShoppingContext'
+import { connect } from 'react-redux'
 
 const navigation = [
   { name: 'Dashboard', href: '#', current: true },
@@ -15,9 +15,7 @@ const navigation = [
   { name: 'Calendar', href: '#', current: false },
 ]
 
-function Header({ logout, togglePanel }) {
-  const { cart } = useContext(ShoppingContext)
-
+function Header({ logout, togglePanel, cart }) {
   const quantity = cart.reduce((p, c) => p + c.quantity, 0)
 
   return (
@@ -181,4 +179,8 @@ function Header({ logout, togglePanel }) {
   )
 }
 
-export default Header
+const mapStateToProps = state => ({
+  cart: state.cart,
+})
+
+export default connect(mapStateToProps)(Header)

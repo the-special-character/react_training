@@ -1,13 +1,12 @@
 import React, { Fragment, useContext } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
-import { ShoppingContext } from '../../context/ShoppingContext'
+import { connect } from 'react-redux'
 import { displayCurrency } from '../../utils'
 import { StatusContext } from '../../context/statusContext'
+import { deleteCartItemRequest } from '../../actions/cartActions'
 
-function CheckoutPanel({ open, togglePanel }) {
-  const { products, cart, deleteCart } = useContext(ShoppingContext)
-
+function CheckoutPanel({ open, togglePanel, products, cart, deleteCart }) {
   const { status } = useContext(StatusContext)
 
   return (
@@ -170,4 +169,13 @@ function CheckoutPanel({ open, togglePanel }) {
   )
 }
 
-export default CheckoutPanel
+const mapStateToProps = state => ({
+  products: state.products,
+  cart: state.cart,
+})
+
+const mapStateToDispatch = dispatch => ({
+  deleteCart: cartItem => deleteCartItemRequest(cartItem)(dispatch),
+})
+
+export default connect(mapStateToProps, mapStateToDispatch)(CheckoutPanel)

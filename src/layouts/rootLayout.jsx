@@ -1,14 +1,8 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { Outlet } from 'react-router-dom'
-import { StatusContext } from '../context/statusContext'
+import { connect } from 'react-redux'
 
-function RootLayout() {
-  const { status } = useContext(StatusContext)
-
-  const errors = status.filter(x => x.state === 'error')
-
-  console.log(errors)
-
+function RootLayout({ errors }) {
   return (
     <div className="relative">
       {errors.map((x, i) => (
@@ -30,4 +24,8 @@ function RootLayout() {
   )
 }
 
-export default RootLayout
+const mapStateToProps = state => ({
+  errors: state.errors,
+})
+
+export default connect(mapStateToProps)(RootLayout)

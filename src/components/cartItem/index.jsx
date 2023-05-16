@@ -1,5 +1,4 @@
 import { connect } from 'react-redux'
-import { deleteCartItemRequest } from '../../actions/cartActions'
 import CartItem from './cartItem'
 
 const mapStateToProps = ({ products, loading }, { cartItem }) => ({
@@ -10,7 +9,12 @@ const mapStateToProps = ({ products, loading }, { cartItem }) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  deleteCart: cartItem => deleteCartItemRequest(cartItem)(dispatch),
+  deleteCart: payload =>
+    dispatch({
+      type: 'DELETE_CART_REQUEST',
+      payload,
+      meta: { loadingId: payload.productId },
+    }),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(CartItem)

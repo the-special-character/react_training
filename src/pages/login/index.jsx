@@ -3,7 +3,6 @@ import { useForm } from 'react-hook-form'
 import { connect } from 'react-redux'
 import CustomForm from '../../components/customForm'
 import loginFields from './fields'
-import { loginRequest } from '../../actions/userActions'
 
 function Login({ onLogin }) {
   const form = useForm({
@@ -14,7 +13,8 @@ function Login({ onLogin }) {
 }
 
 const mapDispatchToProps = dispatch => ({
-  onLogin: data => loginRequest(data)(dispatch),
+  onLogin: data =>
+    dispatch({ type: 'LOGIN_REQUEST', payload: data, meta: { loadingId: -1 } }),
 })
 
 export default connect(null, mapDispatchToProps)(Login)

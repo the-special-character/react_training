@@ -1,10 +1,8 @@
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import { Navigate, Outlet } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { AuthContext } from '../context/authContext'
 import Header from '../components/header'
 import CheckoutPanel from '../components/checkoutPanel'
-import { logoutRequest } from '../actions/userActions'
 
 function MainLayout({ user, logout }) {
   const [open, setOpen] = useState(false)
@@ -27,7 +25,7 @@ function MainLayout({ user, logout }) {
 const mapStateToProps = ({ user }) => ({ user })
 
 const mapDispatchToProps = dispatch => ({
-  logout: () => logoutRequest()(dispatch),
+  logout: () => dispatch({ type: 'logout' }),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainLayout)

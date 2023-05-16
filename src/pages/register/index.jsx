@@ -1,12 +1,10 @@
-import React, { useContext } from 'react'
+import React from 'react'
+import { connect } from 'react-redux'
 import { useForm } from 'react-hook-form'
 import CustomForm from '../../components/customForm'
 import registerFields from './fields'
-import { AuthContext } from '../../context/authContext'
 
-function Register() {
-  const { onRegister } = useContext(AuthContext)
-
+function Register({ onRegister }) {
   const form = useForm({
     mode: 'onBlur',
   })
@@ -19,5 +17,13 @@ function Register() {
     />
   )
 }
+const mapDispatchToProps = dispatch => ({
+  onRegister: data =>
+    dispatch({
+      type: 'REGISTER_REQUEST',
+      payload: data,
+      meta: { loadingId: -1 },
+    }),
+})
 
-export default Register
+export default connect(null, mapDispatchToProps)(Register)
